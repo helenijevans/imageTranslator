@@ -1,6 +1,7 @@
 #trainAndTest.py
 
 import cv2
+import glob
 import numpy as np
 import operator
 import os
@@ -35,7 +36,7 @@ class ContourWithData():
         return True
 
 ###################################################################################################
-def main():
+def main(imgPath):
     allContoursWithData = []                # declare empty lists,
     validContoursWithData = []              # we will fill these shortly
 
@@ -60,16 +61,16 @@ def main():
     kNearest = cv2.ml.KNearest_create()                   # instantiate KNN object
 
     kNearest.train(npaFlattenedImages, cv2.ml.ROW_SAMPLE, npaClassifications)
+    
+    imgTest = cv2.imread(imgPath)          # read in testing numbers image
 
-    imgTestingNumbers = cv2.imread("test5.png")          # read in testing numbers image
-
-    if imgTestingNumbers is None:                           # if image was not read successfully
+    if imgTest is None:                           # if image was not read successfully
         print "error: image not read from file \n\n"        # print error message to std out
         os.system("pause")                                  # pause so user can see error message
         return                                              # and exit function (which exits program)
     # end if
 
-    imgGray = cv2.cvtColor(imgTestingNumbers, cv2.COLOR_BGR2GRAY)       # get grayscale image
+    imgGray = cv2.cvtColor(imgTest, cv2.COLOR_BGR2GRAY)       # get grayscale image
     imgBlurred = cv2.GaussianBlur(imgGray, (5,5), 0)                    # blur
 
                                                         # filter image from grayscale to black and white
@@ -107,7 +108,7 @@ def main():
 
     for contourWithData in validContoursWithData:            # for each contour
                                                 # draw a green rect around the current char
-        cv2.rectangle(imgTestingNumbers,                                        # draw rectangle on original testing image
+        cv2.rectangle(imgTest,                                        # draw rectangle on original testing image
                       (contourWithData.intRectX, contourWithData.intRectY),     # upper left corner
                       (contourWithData.intRectX + contourWithData.intRectWidth, contourWithData.intRectY + contourWithData.intRectHeight),      # lower right corner
                       (0, 255, 0),              # green
@@ -132,7 +133,7 @@ def main():
     print "\n" + strFinalString + "\n"                  # show the full string
     print strFinalString.lower()
 
-    cv2.imshow("imgTestingNumbers", imgTestingNumbers)      # show input image with green boxes drawn around found digits
+    cv2.imshow("imgTest", imgTest)      # show input image with green boxes drawn around found digits
     cv2.waitKey(0)                                          # wait for user key press
 
     cv2.destroyAllWindows()             # remove windows from memory
@@ -141,5 +142,7 @@ def main():
 
 ###################################################################################################
 if __name__ == "__main__":
-    main()
+    testFolder = glob.glob("./testImages/*.png")
+    for img in testFolder:
+        main(img)
 # end if
