@@ -10,3 +10,6 @@ Results from testing current program:
 * The closeness of characters doesn't affect the above behaviour
 * Can't read with 100% accuracy for texts outside of trained fonts
 * Accuracy worsens with more cursive fonts
+
+Adapted from Chris Dahms' Licence Plate Recognition project:
+https://github.com/MicrocontrollersAndMore/OpenCV_3_License_Plate_Recognition_Python
