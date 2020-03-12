@@ -1,6 +1,6 @@
 # imageTranslator
 
-The ultimate plan for this project is to read in images and translate any text found. 
+The ultimate plan for this project is to read in images and translate any text found within. 
 The primary use for this would be in foreign countries to read signs.
 
 At the moment, working on getting OpenCV to detect and output strings of Latin-Alphabet text it finds in images.
