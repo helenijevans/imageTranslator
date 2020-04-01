@@ -142,7 +142,7 @@ def main(imgPath):
 
 ###################################################################################################
 if __name__ == "__main__":
-    testFolder = glob.glob("./testImages/*.png")
+    testFolder = glob.glob("./testImages/*")
     for img in testFolder:
         main(img)
 # end if
