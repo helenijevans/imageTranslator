@@ -7,7 +7,6 @@ import os
 
 # module level variables ##########################################################################
 MIN_CONTOUR_AREA = 100
-
 RESIZED_IMAGE_WIDTH = 20
 RESIZED_IMAGE_HEIGHT = 30
 
